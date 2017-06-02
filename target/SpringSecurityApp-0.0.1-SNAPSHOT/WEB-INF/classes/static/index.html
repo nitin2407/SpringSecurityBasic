@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<base ui-sref="/">
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compartible" content="IE-edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Welcome</title>
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<link rel="stylesheet" href="/scripts/font-awesome/css/font-awesome.min.css">
+	<link rel="stylesheet" href="/scripts/angular-material/angular-material.min.css">
+	<link rel="stylesheet" href="css/loginstyle.css">
+	<link rel="stylesheet" href="css/sweetalert2.min.css">
+	<script src="js/sweetalert2.min.js"></script>
+	<script src="js/jquery-2.1.4.min.js"></script>
+	<script src="js/bootstrap.js"></script>
+	<script src="/scripts/angular/angular.min.js"></script>
+	<script src="/scripts/@uirouter/angularjs/release/angular-ui-router.min.js"></script>
+	<script src="/scripts/angular-material/angular-material.min.js"></script>
+	<script src="/scripts/angular-animate/angular-animate.min.js"></script>
+	<script src="/scripts/angular-messages/angular-messages.min.js"></script>
+	<script src="/scripts/angular-aria/angular-aria.min.js"></script>
+	<script src="/scripts/angular-sanitize/angular-sanitize.js"></script>
+</head>
+
+<body ng-app="myApp">
+	<nav class="navbar navbar-inverse" role="navigation">
+		<div class="navbar-header">
+			<a class="navbar-brand" ui-sref="#">CompanyName</a>
+		</div>
+		<ul class="nav navbar-nav">
+			<li><a ui-sref="login">Login</a></li>
+			<li><a ui-sref="signup">Signup</a></li>
+		</ul>
+	</nav>
+	<script src="js/app/app.js"></script>
+	<script src="js/config/routes.js"></script>
+	<script src="js/factory/urlFactory.js"></script>
+	<script src="js/service/loginService.js"></script>
+	<script src="js/service/signupService.js"></script>
+	<script src="js/controllers/loginController.js"></script>
+	<script src="js/controllers/signupController.js"></script>
+</body>
+<div class="container">
+	<div ui-view></div>
+</div>
+
+</html>

@@ -10,7 +10,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @EnableJpaRepositories("com.SpringSecurityApp.repository")
 @EnableTransactionManagement
-@SpringBootApplication(scanBasePackages={"com.myApp.controllers","com.myApp.services","com.myApp.repository","com.myApp.model"})
+@SpringBootApplication(scanBasePackages={"com.SpringSecurityApp.controller","com.SpringSecurityApp.services","com.SpringSecurityApp.repository","com.SpringSecurityApp.model"})
 @ComponentScan
 public class MyApplication extends SpringBootServletInitializer {
 
