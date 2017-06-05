@@ -5,7 +5,8 @@ app.service('loginService',function($http){
     };
 
     this.login = function(obj){
-        return $http.post('/login', obj);
+        return $http.get('/login', {headers:obj});
+        //return $http.post('/login', obj);
     };
 
     this.fblogin = function(){

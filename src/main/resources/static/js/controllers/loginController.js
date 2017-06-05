@@ -33,6 +33,11 @@ app.controller('loginCtrl', function ($scope, $http, $timeout, $window, loginSer
 
 	$scope.submitForm = function (isValid) {
 
+		var headers = {
+			authorization: "Basic "
+			+ btoa($scope.email + ":" + $scope.password)
+		};
+
 		$scope.userDetails = {
 			email: $scope.email,
 			password: $scope.password
@@ -40,11 +45,11 @@ app.controller('loginCtrl', function ($scope, $http, $timeout, $window, loginSer
 
 		if (isValid) {
 
-			loginService.login($scope.userDetails).then(
+			loginService.login(headers).then(
 				function (data, status) {
 					console.log(data);
 					$scope.userDetails = data.data;
-					console.log($scope.userDetails);
+					//console.log($scope.userDetails);
 					if ($scope.userDetails.message) {
 
 						//alert(data.data.message[0]);
