@@ -1,9 +1,13 @@
 package com.SpringSecurityApp.controller;
 
+import java.security.Principal;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -45,8 +49,11 @@ public class AccountController {
 	@RequestMapping(path = "/login")
 	public Employee Authenticate(Employee employee)
 	{
-		System.out.println(employee.getEmail());
-		return employee;
+		Employee user = (Employee)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		//Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		//String name = auth.getName();
+		System.out.println(user.getFname());	
+		return user;
 		
 	}
 }

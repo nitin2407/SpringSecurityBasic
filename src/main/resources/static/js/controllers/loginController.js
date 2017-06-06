@@ -61,7 +61,7 @@ app.controller('loginCtrl', function ($scope, $http, $timeout, $window, loginSer
 					}
 				},
 				function (data, status) {
-					if (status == 409) {
+					if (status == 401) {
 
 						alert(data.data[0].message);
 						swal({

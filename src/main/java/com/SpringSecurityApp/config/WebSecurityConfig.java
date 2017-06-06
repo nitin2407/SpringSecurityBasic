@@ -1,5 +1,11 @@
 package com.SpringSecurityApp.config;
 
+import java.io.IOException;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -9,14 +15,17 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.AuthenticationEntryPoint;
+import org.springframework.boot.autoconfigure.security.SecurityProperties;
 
 import com.SpringSecurityApp.service.CustomEmployeeDetailsService;
 @Configuration
-//@Order(SecurityProperties.ACCESS_OVERRIDE_ORDER)
-	//@EnableWebSecurity
+@Order(SecurityProperties.ACCESS_OVERRIDE_ORDER)
+	@EnableWebSecurity
 	@ComponentScan(basePackageClasses = CustomEmployeeDetailsService.class)
 	public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
@@ -27,26 +36,44 @@ import com.SpringSecurityApp.service.CustomEmployeeDetailsService;
 		public void configAuthentication(AuthenticationManagerBuilder auth) throws Exception {
 			auth.userDetailsService(userDetailsService).passwordEncoder(passwordencoder());
 		}
+		
+		@Bean
+	    public AuthenticationEntryPoint authenticationEntryPoint() {
+	        return new AuthenticationEntryPoint() {
+				@Override
+				public void commence(HttpServletRequest request, HttpServletResponse response,
+						AuthenticationException authException) throws IOException, ServletException {
+					response.sendError(HttpServletResponse.SC_UNAUTHORIZED);
+				}
+			};
+	    }
 
 		@Override
 		protected void configure(HttpSecurity http) throws Exception {
-			/*http.authorizeRequests()
-			.antMatchers("/admin-home").access("hasRole('admin')")
-			.anyRequest()
-			.permitAll().and()
-					.formLogin().loginPage("/html/login.html")
-					.usernameParameter("email")
-					.passwordParameter("password").and()
-					//.logout().logoutSuccessUrl("/login?logout").and()
-					.exceptionHandling().accessDeniedPage("/html/403.html");//.and()
+			/*http
+			.formLogin().loginPage("/index.html")
+			.usernameParameter("email")
+			.passwordParameter("password").and()
+			//
+			.and()
+			.authorizeRequests()
+			.antMatchers("/html/admin-home.html").access("hasRole('admin')")
+			.anyRequest()//.authenticated();
+			.permitAll();//.and()
 					//.csrf();
 		}*/
 			http
-        .httpBasic()
+        .httpBasic().authenticationEntryPoint(authenticationEntryPoint()).and()
+		.logout().logoutSuccessUrl("/index.html").and()
+			.exceptionHandling().authenticationEntryPoint(authenticationEntryPoint())
+			//.accessDeniedPage("/html/403.html")
       .and()
         .authorizeRequests()
-          .antMatchers("/index.html", "/html/admin-home.html", "/html/login.html", "/").permitAll()
-          .anyRequest().authenticated();
+		.antMatchers("/html/admin-home.html")
+		//.hasRole("admin")
+		.access("hasAuthority('admin')")
+          .antMatchers("/index.html","/login","/html/403.html").permitAll()
+          .anyRequest().permitAll();
 		  //.and().csrf();
 		}
 
