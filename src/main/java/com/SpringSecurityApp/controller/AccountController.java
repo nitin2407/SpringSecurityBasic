@@ -1,7 +1,9 @@
 package com.SpringSecurityApp.controller;
 
+import java.io.IOException;
 import java.security.Principal;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,5 +58,11 @@ public class AccountController {
 		return user;
 		
 	}
+
+	@RequestMapping(path="/403")
+    public void error(HttpServletResponse response) throws IOException {
+		System.out.println("unauthorized");
+		response.sendRedirect("/");
+    }
 }
 

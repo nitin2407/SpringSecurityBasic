@@ -60,27 +60,31 @@ app.controller('loginCtrl', function ($scope, $http, $timeout, $window, loginSer
 						});
 					}
 				},
-				function (data, status) {
-					if (status == 401) {
+				function (error) {
+					console.log(error);
 
-						alert(data.data[0].message);
-						swal({
-							title: data.data[0].message,
-							type: 'warning',
-							showCloseButton: true
-						});
-					}
+					//if (status == 401) {
+
+					//alert(data.data[0].message);
+					swal({
+						title: error.data.error,
+						type: 'error',
+						showCloseButton: true
+					});
+
 
 					/*swal({
 	                    title: 'not able to login',
 	                    type: 'warning',
-	                    showCloseButton: true
-	                });
-	                /*$timeout(function () {
-	                    $window.location.href = urlFactory.home();
-	                }, 2000)*/
+	                    showCloseButton: true	
+	                });*/
+					$timeout(function () {
+						//$window.location.href = urlFactory.home();
+					}, 2000)
 				}
-			);
+			).catch(function (data) {
+				console.log(data)
+			});
 		};
 	};
 
