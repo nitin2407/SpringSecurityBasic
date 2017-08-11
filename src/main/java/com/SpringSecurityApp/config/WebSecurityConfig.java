@@ -91,7 +91,7 @@ import com.SpringSecurityApp.service.CustomEmployeeDetailsService;
 			//.accessDeniedPage("/403")
       .and()
         .authorizeRequests()
-		.antMatchers("/html/admin-home.html")
+		.antMatchers("/getEmp/*")
 		//.hasRole("admin")
 		.access("hasAuthority('admin')")
           //.antMatchers("/html/403.html").permitAll()

@@ -1,1 +1,15 @@
+com\SpringSecurityApp\controller\SimpleErrorController.class
+com\SpringSecurityApp\model\ErrorJson.class
+com\SpringSecurityApp\repository\IEmployeeRepository.class
+com\SpringSecurityApp\config\WebSecurityConfig.class
+com\SpringSecurityApp\MyApplication.class
 com\SpringSecurityApp\config\WebSecurityConfig$1.class
+com\SpringSecurityApp\controller\EmployeeController.class
+com\SpringSecurityApp\config\WebSecurityConfig$2.class
+com\SpringSecurityApp\controller\AccountController.class
+com\SpringSecurityApp\model\Employee.class
+com\SpringSecurityApp\model\CustomEmployeeDetails.class
+com\SpringSecurityApp\service\CustomEmployeeDetailsService.class
+com\SpringSecurityApp\service\EmployeeService.class
+com\SpringSecurityApp\repository\IUserRolesRepository.class
+com\SpringSecurityApp\model\UserRoles.class
